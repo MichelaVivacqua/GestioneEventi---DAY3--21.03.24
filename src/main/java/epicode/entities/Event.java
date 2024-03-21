@@ -4,8 +4,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+//lo rendo una single table in quanto sono accettati i valori null
 @Entity
 @Table(name = "eventi")
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn (name = "tipo_evento")
 public class Event {
     @Id
     @GeneratedValue
