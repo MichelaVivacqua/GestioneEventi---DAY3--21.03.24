@@ -1,8 +1,10 @@
 package epicode.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Entity
 public class Concerto extends Event{
     @Enumerated(EnumType.STRING)
     private TipoConcerto tipoConcerto;

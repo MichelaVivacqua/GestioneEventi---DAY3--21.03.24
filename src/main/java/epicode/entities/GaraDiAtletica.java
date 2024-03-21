@@ -1,28 +1,35 @@
 package epicode.entities;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-
+@DiscriminatorValue("GARA_ATLETICA")
 public class GaraDiAtletica extends Event {
+    @ManyToMany
+    @JoinTable(
+            name = "gara_atleti",
+            joinColumns = @JoinColumn(name = "gara_id"),
+            inverseJoinColumns = @JoinColumn(name = "atleta_id")
+    )
+    private List<Person> atleti;
 
-    private Person setAtleti;
+    @ManyToOne
+    @JoinColumn(name = "vincitore_id")
     private Person vincitore;
 
-    public  GaraDiAtletica (){
+    public  GaraDiAtletica(){}
+    public  GaraDiAtletica (List<Person> atleti, Person vincitore){
+        this.atleti=atleti;
+        this.vincitore=vincitore;
     }
 
-    public GaraDiAtletica (Person setAtleti, Person vincitore) {
-        this.setAtleti = setAtleti;
-        this.vincitore = vincitore;
+    public List<Person> getAtleti() {
+        return atleti;
     }
 
-    public Person getSetAtleti() {
-        return setAtleti;
-    }
-
-    public void setSetAtleti(Person setAtleti) {
-        this.setAtleti = setAtleti;
+    public void setAtleti(List<Person> atleti) {
+        this.atleti = atleti;
     }
 
     public Person getVincitore() {
