@@ -1,8 +1,19 @@
 package epicode.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import java.time.LocalDate;
+
 
 @Entity
+@NamedQuery(
+        name = "PartitaDiCalcio.getPartiteVinteInCasa",
+        query = "SELECT p FROM PartitaDiCalcio p WHERE p.squadraVincente = :squadraCasa"
+)
+@NamedQuery(
+        name = "PartitaDiCalcio.getPartiteVinteInTrasferta",
+        query = "SELECT p FROM PartitaDiCalcio p WHERE p.squadraVincente <> :squadraCasa AND (p.squadraDiCasa = :squadraCasa OR p.squadraOspite = :squadraCasa)"
+)
 
 public class PartitaDiCalcio extends Event {
 
@@ -15,13 +26,19 @@ public class PartitaDiCalcio extends Event {
     public  PartitaDiCalcio (){
     }
 
-    public PartitaDiCalcio (String squadraDiCasa,String squadraOspite, String squadraVincente, int numeroGolSquadraDiCasa, int numeroGolSquadraOspite){
-        this.squadraDiCasa=squadraDiCasa;
-        this.squadraOspite=squadraOspite;
-        this.squadraVincente=squadraVincente;
-        this.numeroGolSquadraDiCasa=numeroGolSquadraDiCasa;
-        this.numeroGolSquadraOspite=numeroGolSquadraOspite;
-    }
+
+    public PartitaDiCalcio(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location, String squadraDiCasa, String squadraOspite, String squadraVincente, int numeroGolSquadraDiCasa, int numeroGolSquadraOspite) {
+        setTitolo(titolo);
+        setDataEvento(dataEvento);
+        setDescrizione(descrizione);
+        setTipoEvento(tipoEvento);
+        setNumeroMassimoPartecipanti(numeroMassimoPartecipanti);
+        setLuogoEvento(location);
+        this.squadraDiCasa = squadraDiCasa;
+        this.squadraOspite = squadraOspite;
+        this.squadraVincente = squadraVincente;
+        this.numeroGolSquadraDiCasa = numeroGolSquadraDiCasa;
+        this.numeroGolSquadraOspite = numeroGolSquadraOspite;}
 
     public String getSquadraDiCasa() {
         return squadraDiCasa;

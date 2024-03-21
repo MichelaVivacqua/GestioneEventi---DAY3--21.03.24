@@ -75,6 +75,15 @@ public class Application {
         List<Concerto> concertiPerGenere = eventsDAO.getConcertiPerGenere(TipoConcerto.ROCK);
         System.out.println("Concerti per genere: " + concertiPerGenere);
 
+        PartitaDiCalcio partita1 = new PartitaDiCalcio("Juve_Roma", LocalDate.now(), "Descrizione della partita", TipoEvento.PRIVATO, 100, location1, "Juve", "Roma", "Squadra Vincente", 2, 1);
+
+        PartitaDiCalcio partita2 = new PartitaDiCalcio("Juve_Inter", LocalDate.now(), "Descrizione della partita", TipoEvento.PRIVATO, 100, location1, "Juve", "Inter", "Squadra Vincente", 2, 1);
+
+
+
+        eventsDAO.save(partita1);
+        eventsDAO.save(partita2);
+
         em.close();
         emf.close();
    }
